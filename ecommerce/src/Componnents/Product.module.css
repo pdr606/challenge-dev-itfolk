@@ -3,6 +3,7 @@
   height: 600px;
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
+  padding-top: 20px;
 }
 
 .left {
@@ -13,12 +14,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .right {
   margin-right: 10%;
   width: 40%;
   height: 100%;
+  padding-left: 2%;
 }
 
 .right h1 {
@@ -45,6 +50,7 @@
 
 .right span {
   font-size: 12px;
+  padding-right: 5px;
 }
 
 .about p {
