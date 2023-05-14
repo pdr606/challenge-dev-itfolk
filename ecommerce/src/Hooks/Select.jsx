@@ -1,13 +1,13 @@
 import React from "react";
 
-function Select({ options, value, setValue, ...props }) {
+function Select({ options, value, setValue, text, ...props }) {
   return (
     <select
       value={value}
       onChange={({ target }) => setValue(target.value)}
       {...props}
     >
-      <option value="Todas">Todas</option>
+      <option value={text}>{text}</option>
       {options.map((option) => (
         <option key={option} value={option}>
           {option}

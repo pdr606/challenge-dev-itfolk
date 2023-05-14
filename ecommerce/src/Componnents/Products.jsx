@@ -47,6 +47,7 @@ const Products = () => {
       <form className={styles.containerInput}>
         <div className={styles.containerInputBox}>
           <Select
+            text="Todas"
             className={styles.inputSelect}
             options={["Samsung", "Apple", "Xiaomi"]}
             value={category}
