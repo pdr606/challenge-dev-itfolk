@@ -19,8 +19,6 @@ const Product = () => {
   }, [id]);
 
   if (data === null) return null;
-  console.log(data);
-
   return (
     <div>
       <div className={styles.container}>
@@ -36,12 +34,13 @@ const Product = () => {
           </p>
           <div className={styles.about}>
             <p>Sobre este item: </p>
-            {data.descricao.map((item) => (
-              <ul>
+            <ul>
+              {data.descricao.map((item) => (
                 <li key={item}>{item}</li>
-              </ul>
-            ))}
+              ))}
+            </ul>
           </div>
+          <button>Comprar</button>
         </div>
       </div>
     </div>

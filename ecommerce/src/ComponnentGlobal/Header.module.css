@@ -1,0 +1,26 @@
+header {
+  background-color: #131921;
+  height: 70px;
+  display: flex;
+}
+
+.container {
+  display: flex;
+}
+
+.containerImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 100%;
+}
+
+.Link {
+  text-align: center;
+  justify-content: center;
+}
+
+.container img {
+  width: 50%;
+}
