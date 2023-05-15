@@ -7,3 +7,17 @@
 body {
   background-color: white;
 }
+
+.animaLeft {
+  transform: translateX(-60px);
+  opacity: 0;
+  animation: animaLeft 3s forwards;
+  display: block;
+}
+
+@keyframes animaLeft {
+  to {
+    transform: initial;
+    opacity: initial;
+  }
+}

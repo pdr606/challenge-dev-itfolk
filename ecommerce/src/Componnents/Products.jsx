@@ -3,11 +3,31 @@ import styles from "./Products.module.css";
 import { Link } from "react-router-dom";
 import Select from "../Hooks/Select";
 import Input from "../Hooks/Input";
+import { GlobalContext } from "../Context/GlobalContext";
 
 const Products = () => {
   const [category, setCategory] = React.useState("Todas");
   const [product, setProduct] = React.useState("");
   const [data, setData] = React.useState(null);
+  const { totalAmount, setTotalAmount } = React.useContext(GlobalContext);
+  const { storage, setStorage } = React.useContext(GlobalContext);
+
+  React.useEffect(() => {
+    if (localStorage.length > 0) {
+      const takeLocalStorage = localStorage.getItem("storage");
+      let parsedItem = JSON.parse(takeLocalStorage);
+      setStorage(parsedItem);
+    }
+  }, [setStorage]);
+
+  React.useEffect(() => {
+    function sum() {
+      const totalToPay = storage.reduce((a, o) => a + +o.quantidade, 0);
+      setTotalAmount(totalToPay);
+    }
+
+    sum();
+  }, [storage, totalAmount, setTotalAmount]);
 
   function handleChange({ target }) {
     setProduct(target.value);
@@ -65,7 +85,7 @@ const Products = () => {
       </form>
       <div className={styles.container}>
         {itemsToDisplay.map((item) => (
-          <div key={item.id} className={styles.containerDiv}>
+          <div key={item.id} className={`${styles.containerDiv} animaLeft`}>
             <Link
               className={styles.link}
               to={`product/${item.id}`}

@@ -7,11 +7,16 @@ import { GlobalContext } from "../Context/GlobalContext";
 const Product = () => {
   const { id } = useParams();
   const [data, setData] = React.useState(null);
-  const [quantidade, setQuantidade] = useState();
-
+  const [quantidade, setQuantidade] = React.useState();
+  const [notify, setNotify] = React.useState(null);
+  const { totalAmount, setTotalAmount } = React.useContext(GlobalContext);
   const { storage, setStorage } = useContext(GlobalContext);
 
   function handleClick(e) {
+    setNotify("Pedido adicionado ao carrinho");
+    setTimeout(() => {
+      setNotify(null);
+    }, 1000);
     const { id, produto, image, preço } = data;
 
     if (quantidade === undefined) return null;
@@ -26,9 +31,21 @@ const Product = () => {
       total,
     };
 
+    localStorage.setItem(
+      "storage",
+      JSON.stringify([...storage, filterStorage])
+    );
     setStorage([...storage, filterStorage]);
-    console.log(storage);
   }
+
+  React.useEffect(() => {
+    function sum() {
+      const totalToPay = storage.reduce((a, o) => a + +o.quantidade, 0);
+      setTotalAmount(totalToPay);
+    }
+
+    sum();
+  }, [storage, totalAmount, setTotalAmount]);
 
   React.useEffect(() => {
     async function restAPI() {
@@ -73,6 +90,7 @@ const Product = () => {
               options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]}
             />
           </div>
+          <p>{notify}</p>
           <button id={data.id} onClick={(e) => handleClick(e)}>
             Adicionar ao carrinho
           </button>

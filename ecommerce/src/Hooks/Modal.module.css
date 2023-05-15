@@ -1,0 +1,32 @@
+.containerModal {
+  background-color: white;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  width: 350px;
+  margin: auto;
+  height: 200px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  font-size: 40px;
+  display: flex;
+}
+
+.containerModal img {
+  padding-top: 20px;
+  width: 15%;
+}
+
+.components {
+  display: flex table-column;
+}
