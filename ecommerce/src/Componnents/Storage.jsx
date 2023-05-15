@@ -8,7 +8,6 @@ import VerifyLocalStorage from "../Hooks/VerifyLocalStorage";
 
 const Storage = () => {
   const { verify } = VerifyLocalStorage();
-
   const {
     storage,
     setStorage,
