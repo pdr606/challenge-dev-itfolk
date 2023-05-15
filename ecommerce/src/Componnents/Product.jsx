@@ -64,15 +64,13 @@ const Product = () => {
     }
   }, [request, data, id]);
 
-  if (loading)
+  if (error)
     return (
-      <p className={styles.loading}>
-        Carregando... <img src={loadingGif2} alt="Gif de Carregamento" />
-      </p>
+      <h4 className={styles.error}>A requisição falhou, tente novamente</h4>
     );
   if (data)
     return (
-      <div>
+      <div className="animaLeft">
         <div className={styles.container}>
           <div className={styles.left}>
             <img src={data.image} alt="Imagem telefone" />

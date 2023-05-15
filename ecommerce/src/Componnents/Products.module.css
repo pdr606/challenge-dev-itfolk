@@ -108,9 +108,10 @@ main {
   align-items: center;
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
+  margin-top: 20px;
 }
 
-.error p {
+.error h4 {
   color: red;
 }
 

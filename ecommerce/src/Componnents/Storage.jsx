@@ -17,6 +17,7 @@ const Storage = () => {
     setTotalAmount,
   } = React.useContext(GlobalContext);
   const [openModal, setOpenModal] = React.useState(false);
+  const [openModalDelete, setOpenModalDelete] = React.useState(false);
 
   React.useEffect(() => {
     verify();
@@ -30,14 +31,6 @@ const Storage = () => {
     },
     [storage, setStorage]
   );
-
-  // React.useEffect(() => {
-  //   if (localStorage.length > 0) {
-  //     const takeLocalStorage = localStorage.getItem("storage");
-  //     let parsedItem = JSON.parse(takeLocalStorage);
-  //     setStorage(parsedItem);
-  //   }
-  // }, [setStorage]);
 
   React.useEffect(() => {
     function sum() {
@@ -54,14 +47,15 @@ const Storage = () => {
   }, [storage, totalPay, totalAmount, setTotalAmount, setTotalPay]);
 
   React.useEffect(() => {
-    if (openModal) {
+    if (openModal || openModalDelete) {
       setTimeout(() => {
         setStorage([]);
         setOpenModal(false);
+        setOpenModalDelete(false);
         localStorage.clear();
       }, 4000);
     }
-  }, [openModal, setStorage]);
+  }, [openModal, setStorage, openModalDelete]);
 
   return (
     <div>
@@ -97,6 +91,18 @@ const Storage = () => {
               Subtotal ({totalAmount} itens): <span>R$ {totalPay}</span>
             </h2>
             <button onClick={() => setOpenModal(!openModal)}>Finalizar</button>
+            <button
+              onClick={() => setOpenModalDelete(!openModalDelete)}
+              className={styles.deleteButton}
+            >
+              Excluir Carrinho
+            </button>
+
+            <Modal
+              text="Seu carrinho está sendo excluido"
+              isOpen={openModalDelete}
+              src={loadingGif}
+            ></Modal>
 
             <Modal
               text="Obrigado pela preferência, seu pedido está sendo finalizado"

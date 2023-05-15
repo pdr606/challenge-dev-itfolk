@@ -7,9 +7,12 @@ export const GlobalProvider = ({ children }) => {
   const [totalPay, setTotalPay] = React.useState(null);
   const [totalAmount, setTotalAmount] = React.useState(null);
   const [data, setData] = React.useState(null);
+  const [globalData, setGlobalData] = React.useState(null);
   return (
     <GlobalContext.Provider
       value={{
+        globalData,
+        setGlobalData,
         storage,
         setStorage,
         totalPay,

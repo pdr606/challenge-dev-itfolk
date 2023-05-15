@@ -9,11 +9,11 @@ import VerifyLocalStorage from "../Hooks/VerifyLocalStorage";
 import { GlobalContext } from "../Context/GlobalContext";
 
 const Products = () => {
-  const [resultApi, setResultApi] = React.useState([]);
   const { verify } = VerifyLocalStorage();
   const { request, loading, error, data } = useFetch();
-  const { totalAmount, setTotalAmount, storage } =
+  const { globalData, setGlobalData, totalAmount, setTotalAmount, storage } =
     React.useContext(GlobalContext);
+  const [resultApi, setResultApi] = React.useState([]);
   const [category, setCategory] = React.useState("Todas");
   const [product, setProduct] = React.useState("");
 
@@ -22,16 +22,17 @@ const Products = () => {
   }, [verify]);
 
   React.useEffect(() => {
-    if (data === null) {
+    if (data === null && globalData === null) {
       async function fetchData() {
         const { response, json } = await request(
           "https://my-json-server.typicode.com/pdr606/api-test/products"
         );
         setResultApi(response, json);
+        setGlobalData(json);
       }
       fetchData();
     }
-  }, [request, data]);
+  }, [request, data, globalData, setGlobalData]);
 
   React.useEffect(() => {
     function sum() {
@@ -47,18 +48,18 @@ const Products = () => {
 
   const filterProduct =
     product.length > 0
-      ? data.filter((item) =>
+      ? globalData.filter((item) =>
           item.produto.toLowerCase().includes(product.toLowerCase())
         )
       : [];
 
   const filterCategory =
     category !== "Todas"
-      ? data.filter((item) => item.categoria === category)
+      ? globalData.filter((item) => item.categoria === category)
       : [];
 
   const filteredItems = product.length > 0 ? filterProduct : filterCategory;
-  const itemsToDisplay = filteredItems.length > 0 ? filteredItems : data;
+  const itemsToDisplay = filteredItems.length > 0 ? filteredItems : globalData;
 
   if (loading)
     return (
@@ -66,7 +67,13 @@ const Products = () => {
         Carregando... <img src={loadingGif2} alt="Gif de Carregamento" />
       </p>
     );
-  if (data)
+
+  if (error)
+    return (
+      <h4 className={styles.error}>A requisição falhou, tente novamente</h4>
+    );
+
+  if (globalData)
     return (
       <main>
         <form className={styles.containerInput}>
