@@ -4,8 +4,11 @@ import styles from "./Storage.module.css";
 import badIcon from "../img/badIcon.png";
 import Modal from "../Hooks/Modal";
 import loadingGif from "../img/loadingGif.gif";
+import VerifyLocalStorage from "../Hooks/VerifyLocalStorage";
 
 const Storage = () => {
+  const { verify } = VerifyLocalStorage();
+
   const {
     storage,
     setStorage,
@@ -16,6 +19,10 @@ const Storage = () => {
   } = React.useContext(GlobalContext);
   const [openModal, setOpenModal] = React.useState(false);
 
+  React.useEffect(() => {
+    verify();
+  }, [verify]);
+
   const deleteItem = React.useCallback(
     (item) => {
       const newStorage = storage.filter((obj) => obj !== item);
@@ -25,13 +32,13 @@ const Storage = () => {
     [storage, setStorage]
   );
 
-  React.useEffect(() => {
-    if (localStorage.length > 0) {
-      const takeLocalStorage = localStorage.getItem("storage");
-      let parsedItem = JSON.parse(takeLocalStorage);
-      setStorage(parsedItem);
-    }
-  }, [setStorage]);
+  // React.useEffect(() => {
+  //   if (localStorage.length > 0) {
+  //     const takeLocalStorage = localStorage.getItem("storage");
+  //     let parsedItem = JSON.parse(takeLocalStorage);
+  //     setStorage(parsedItem);
+  //   }
+  // }, [setStorage]);
 
   React.useEffect(() => {
     function sum() {

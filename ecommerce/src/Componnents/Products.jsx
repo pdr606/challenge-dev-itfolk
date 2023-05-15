@@ -5,10 +5,12 @@ import Select from "../Hooks/Select";
 import Input from "../Hooks/Input";
 import useFetch from "../Hooks/useFetch";
 import loadingGif2 from "../img/loadingGif2.gif";
+import VerifyLocalStorage from "../Hooks/VerifyLocalStorage";
 import { GlobalContext } from "../Context/GlobalContext";
 
 const Products = () => {
   const [resultApi, setResultApi] = React.useState([]);
+  const { verify } = VerifyLocalStorage();
   const { request, loading, error } = useFetch();
   const { totalAmount, setTotalAmount, storage, setStorage, data } =
     React.useContext(GlobalContext);
@@ -16,12 +18,8 @@ const Products = () => {
   const [product, setProduct] = React.useState("");
 
   React.useEffect(() => {
-    if (localStorage.length > 0) {
-      const takeLocalStorage = localStorage.getItem("storage");
-      let parsedItem = JSON.parse(takeLocalStorage);
-      setStorage(parsedItem);
-    }
-  }, [setStorage]);
+    verify();
+  }, [verify]);
 
   React.useEffect(() => {
     if (data === null) {
