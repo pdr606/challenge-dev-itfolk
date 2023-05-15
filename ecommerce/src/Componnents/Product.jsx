@@ -6,21 +6,23 @@ import { GlobalContext } from "../Context/GlobalContext";
 
 const Product = () => {
   const { id } = useParams();
-  const [data, setData] = React.useState(null);
+  const [dataLocal, setDataLocal] = React.useState(null);
   const [quantidade, setQuantidade] = React.useState();
   const [notify, setNotify] = React.useState(null);
-  const { totalAmount, setTotalAmount } = React.useContext(GlobalContext);
+  const { totalAmount, setTotalAmount, data } = React.useContext(GlobalContext);
   const { storage, setStorage } = useContext(GlobalContext);
 
   function handleClick(e) {
     e.preventDefault();
 
-    setNotify(true);
+    if (quantidade > 0) {
+      setNotify(true);
+    }
     setTimeout(() => {
       setNotify(null);
     }, 1000);
 
-    const { id, produto, image, preço } = data;
+    const { id, produto, image, preço } = dataLocal;
 
     if (quantidade === undefined) return null;
 
@@ -51,35 +53,28 @@ const Product = () => {
   }, [storage, totalAmount, setTotalAmount]);
 
   React.useEffect(() => {
-    async function restAPI() {
-      const response = await fetch(
-        `https://my-json-server.typicode.com/pdr606/api-test/products/${id}`
-      );
-      const json = await response.json();
-      setData(json);
-    }
+    const filterData = data.filter((item) => item.id === +id);
+    setDataLocal(filterData[0]);
+  }, [id, data]);
 
-    restAPI();
-  }, [id]);
-
-  if (data === null) return null;
+  if (dataLocal === null) return null;
   return (
     <div>
       <div className={styles.container}>
         <div className={styles.left}>
-          <img src={data.image} alt="Imagem telefone" />
+          <img src={dataLocal.image} alt="Imagem telefone" />
         </div>
         <div className={styles.right}>
-          <h1>{data.produto}</h1>
+          <h1>{dataLocal.produto}</h1>
           <h2>Confira esse preço imbátivel</h2>
           <p>
             <span>R$</span>
-            {data.preço}
+            {dataLocal.preço}
           </p>
           <div className={styles.about}>
             <p>Sobre este item: </p>
             <ul>
-              {data.descricao.map((item) => (
+              {dataLocal.descricao.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
@@ -96,7 +91,7 @@ const Product = () => {
           {notify ? (
             <h4 className={styles.notify}>Pedido adicionado ao carrinho ✔ </h4>
           ) : null}
-          <button id={data.id} onClick={(e) => handleClick(e)}>
+          <button id={dataLocal.id} onClick={(e) => handleClick(e)}>
             Adicionar ao carrinho
           </button>
         </div>
