@@ -54,13 +54,15 @@ const Product = () => {
   }, [storage, totalAmount, setTotalAmount]);
 
   React.useEffect(() => {
-    async function fetchData() {
-      const { response, json } = await request(
-        `https://my-json-server.typicode.com/pdr606/api-test/products/${id}`
-      );
+    if (data === null) {
+      async function fetchData() {
+        const { response, json } = await request(
+          `https://my-json-server.typicode.com/pdr606/api-test/products/${id}`
+        );
+      }
+      fetchData();
     }
-    fetchData();
-  }, [request, id, data]);
+  }, [request, data, id]);
 
   if (loading)
     return (

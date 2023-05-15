@@ -60,12 +60,6 @@ const Products = () => {
   const filteredItems = product.length > 0 ? filterProduct : filterCategory;
   const itemsToDisplay = filteredItems.length > 0 ? filteredItems : data;
 
-  if (error)
-    return (
-      <p className={styles.error}>
-        {request.error} Tivemos um problemas a requisição.
-      </p>
-    );
   if (loading)
     return (
       <p className={styles.loading}>
