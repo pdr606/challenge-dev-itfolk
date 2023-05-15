@@ -4,15 +4,14 @@ import Select from "../Hooks/Select";
 import { useParams } from "react-router-dom";
 import { GlobalContext } from "../Context/GlobalContext";
 import useFetch from "../Hooks/useFetch";
-import loadingGif2 from "../img/loadingGif2.gif";
 
 const Product = () => {
   const { id } = useParams();
-  const { request, loading, error, data } = useFetch();
-  const [quantidade, setQuantidade] = React.useState();
-  const [notify, setNotify] = React.useState(null);
+  const { request, error, data } = useFetch();
   const { totalAmount, setTotalAmount } = React.useContext(GlobalContext);
   const { storage, setStorage } = useContext(GlobalContext);
+  const [quantidade, setQuantidade] = React.useState();
+  const [notify, setNotify] = React.useState(null);
 
   function handleClick(e) {
     e.preventDefault();
@@ -20,6 +19,7 @@ const Product = () => {
     if (quantidade > 0) {
       setNotify(true);
     }
+
     setTimeout(() => {
       setNotify(null);
     }, 1000);
