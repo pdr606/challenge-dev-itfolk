@@ -1,8 +1,7 @@
 import React from "react";
-import { GlobalContext } from "../Context/GlobalContext";
 
 const useFetch = () => {
-  const { data, setData } = React.useContext(GlobalContext);
+  const [data, setData] = React.useState(null);
   const [error, setError] = React.useState(null);
   const [loading, setLoading] = React.useState(null);
 
@@ -14,10 +13,11 @@ const useFetch = () => {
         setError(null);
         setLoading(true);
         response = await fetch(url, options);
+        console.log(response);
         json = await response.json();
       } catch (erro) {
         json = null;
-        setError("Falha no carregamento");
+        setError(true);
       } finally {
         setLoading(false);
         setData(json);

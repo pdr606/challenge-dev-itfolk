@@ -11,8 +11,8 @@ import { GlobalContext } from "../Context/GlobalContext";
 const Products = () => {
   const [resultApi, setResultApi] = React.useState([]);
   const { verify } = VerifyLocalStorage();
-  const { request, loading, error } = useFetch();
-  const { totalAmount, setTotalAmount, storage, setStorage, data } =
+  const { request, loading, error, data } = useFetch();
+  const { totalAmount, setTotalAmount, storage } =
     React.useContext(GlobalContext);
   const [category, setCategory] = React.useState("Todas");
   const [product, setProduct] = React.useState("");
@@ -60,7 +60,12 @@ const Products = () => {
   const filteredItems = product.length > 0 ? filterProduct : filterCategory;
   const itemsToDisplay = filteredItems.length > 0 ? filteredItems : data;
 
-  if (error) return <p>{error}</p>;
+  if (error)
+    return (
+      <p className={styles.error}>
+        {request.error} Tivemos um problemas a requisição.
+      </p>
+    );
   if (loading)
     return (
       <p className={styles.loading}>
