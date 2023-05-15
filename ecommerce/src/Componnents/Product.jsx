@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styles from "./Product.module.css";
-import { useParams } from "react-router-dom";
 import Select from "../Hooks/Select";
+import { useParams } from "react-router-dom";
 import { GlobalContext } from "../Context/GlobalContext";
 
 const Product = () => {
@@ -13,15 +13,18 @@ const Product = () => {
   const { storage, setStorage } = useContext(GlobalContext);
 
   function handleClick(e) {
-    setNotify("Pedido adicionado ao carrinho");
+    e.preventDefault();
+
+    setNotify(true);
     setTimeout(() => {
       setNotify(null);
     }, 1000);
+
     const { id, produto, image, preço } = data;
 
     if (quantidade === undefined) return null;
-    let total = +preço.replace(".", "") * quantidade;
 
+    let total = +preço.replace(".", "") * quantidade;
     const filterStorage = {
       id,
       produto,
@@ -90,7 +93,9 @@ const Product = () => {
               options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]}
             />
           </div>
-          <p>{notify}</p>
+          {notify ? (
+            <h4 className={styles.notify}>Pedido adicionado ao carrinho ✔ </h4>
+          ) : null}
           <button id={data.id} onClick={(e) => handleClick(e)}>
             Adicionar ao carrinho
           </button>

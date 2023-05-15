@@ -101,3 +101,19 @@ main {
   color: black;
   font-weight: bold;
 }
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.loading img {
+  width: 3%;
+}
+
+.loading h4 {
+  font-size: 20px;
+  font-weight: bold;
+}

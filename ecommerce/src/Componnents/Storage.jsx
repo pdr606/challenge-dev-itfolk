@@ -6,9 +6,14 @@ import Modal from "../Hooks/Modal";
 import loadingGif from "../img/loadingGif.gif";
 
 const Storage = () => {
-  const { storage, setStorage } = React.useContext(GlobalContext);
-  const { totalPay, setTotalPay } = React.useContext(GlobalContext);
-  const { totalAmount, setTotalAmount } = React.useContext(GlobalContext);
+  const {
+    storage,
+    setStorage,
+    totalPay,
+    setTotalPay,
+    totalAmount,
+    setTotalAmount,
+  } = React.useContext(GlobalContext);
   const [openModal, setOpenModal] = React.useState(false);
 
   const deleteItem = React.useCallback(
@@ -19,6 +24,14 @@ const Storage = () => {
     },
     [storage, setStorage]
   );
+
+  React.useEffect(() => {
+    if (localStorage.length > 0) {
+      const takeLocalStorage = localStorage.getItem("storage");
+      let parsedItem = JSON.parse(takeLocalStorage);
+      setStorage(parsedItem);
+    }
+  }, [setStorage]);
 
   React.useEffect(() => {
     function sum() {
@@ -39,10 +52,10 @@ const Storage = () => {
       setTimeout(() => {
         setStorage([]);
         setOpenModal(false);
+        localStorage.clear();
       }, 4000);
     }
-    deleteItem();
-  }, [openModal, setStorage, deleteItem]);
+  }, [openModal, setStorage]);
 
   return (
     <div>
@@ -50,7 +63,10 @@ const Storage = () => {
         <div className={styles.container}>
           <h1 className={styles.titulo}>Carrinho de compras:</h1>
           {storage.map((item) => (
-            <div key={item.id} className={styles.containerStorage}>
+            <div
+              key={Math.random() * 10000}
+              className={styles.containerStorage}
+            >
               <div className={styles.containerStorageImg}>
                 <div className={styles.img}>
                   <img src={item.image} alt="Imagem Produto" />

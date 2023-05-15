@@ -15,10 +15,12 @@ const Header = () => {
           <Link className={styles.Link} to="/">
             <img src={logoAmazon} alt="Logo Amazon" />
           </Link>
-          <Link to="/shoppingCart">
-            <img src={shopingCart} alt="Carrinho de compras" />
+          <Link className={styles.Link} to="/shoppingCart">
+            <div className={styles.storage}>
+              <img src={shopingCart} alt="Carrinho de compras" />
+              <p className={styles.totalAmount}>{totalAmount}</p>
+            </div>
           </Link>
-          <p className={styles.totalAmount}>{totalAmount}</p>
         </div>
       </div>
     </header>
