@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styles from "./Product.module.css";
 import { useParams } from "react-router-dom";
 import Select from "../Hooks/Select";
