@@ -4,8 +4,10 @@ import Select from "../Hooks/Select";
 import { useParams } from "react-router-dom";
 import { GlobalContext } from "../Context/GlobalContext";
 import useFetch from "../Hooks/useFetch";
+import VerifyLocalStorage from "../Hooks/VerifyLocalStorage";
 
 const Product = () => {
+  const { verify } = VerifyLocalStorage();
   const { id } = useParams();
   const { request, error, data } = useFetch();
   const { totalAmount, setTotalAmount } = React.useContext(GlobalContext);
@@ -43,6 +45,10 @@ const Product = () => {
     );
     setStorage([...storage, filterStorage]);
   }
+
+  React.useEffect(() => {
+    verify();
+  }, [verify]);
 
   React.useEffect(() => {
     function sum() {
