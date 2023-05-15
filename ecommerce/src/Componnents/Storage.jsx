@@ -53,7 +53,7 @@ const Storage = () => {
         setOpenModal(false);
         setOpenModalDelete(false);
         localStorage.clear();
-      }, 4000);
+      }, 2000);
     }
   }, [openModal, setStorage, openModalDelete]);
 
