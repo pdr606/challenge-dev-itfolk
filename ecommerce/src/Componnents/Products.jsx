@@ -35,11 +35,14 @@ const Products = () => {
   }, [request, data, globalData, setGlobalData]);
 
   React.useEffect(() => {
-    function sum() {
-      const totalToPay = storage.reduce((a, o) => a + +o.quantidade, 0);
-      setTotalAmount(totalToPay);
+    if (localStorage.getItem("storage") !== null){
+      function sum() {
+        const totalToPay = storage.reduce((a, o) => a + +o.quantidade, 0);
+        setTotalAmount(totalToPay);
+      }
+      sum()
     }
-    sum();
+  ;
   }, [storage, totalAmount, setTotalAmount]);
 
   function handleChange({ target }) {
