@@ -18,7 +18,9 @@ const Header = () => {
           <Link className={styles.Link} to="/shoppingCart">
             <div className={styles.storage}>
               <img src={shopingCart} alt="Carrinho de compras" />
-              <p className={styles.totalAmount}>{totalAmount}</p>
+              {totalAmount > 0 && (
+                <p className={styles.totalAmount}>{totalAmount}</p>
+              )}
             </div>
           </Link>
         </div>

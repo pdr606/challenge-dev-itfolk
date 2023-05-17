@@ -6,7 +6,7 @@ const Modal = ({ isOpen, text, src }) => {
     return (
       <div className={styles.containerModal}>
         <div className={styles.components}>
-          <div>{text}</div>
+          <p>{text}</p>
           <img src={src} alt="Loading Gif"></img>
         </div>
       </div>
