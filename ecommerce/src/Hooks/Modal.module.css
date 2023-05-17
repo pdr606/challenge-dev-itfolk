@@ -24,9 +24,13 @@
 
 .containerModal img {
   padding-top: 20px;
-  width: 15%;
+  width: 10%;
 }
 
 .components {
   display: flex table-column;
+}
+
+.components p {
+  font-family: "Roboto", sans-serif;
 }

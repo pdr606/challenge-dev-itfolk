@@ -19,7 +19,9 @@ const Product = () => {
     e.preventDefault();
 
     if (quantidade > 0) {
-      setNotify(true);
+      setNotify("Pedido adicionado ao carrinho ✔");
+    } else {
+      setNotify("Adicione ao menos um pedido no carrinho 𝙓");
     }
 
     setTimeout(() => {
@@ -29,7 +31,10 @@ const Product = () => {
     const { id, produto, image, preço } = data;
     if (quantidade === undefined || quantidade === "0") return null;
 
-    let total = +preço.replace(".", "") * quantidade;
+    let total = Number(String(preço).replace(".", "")) * quantidade;
+
+    console.log(total);
+
     const filterStorage = {
       id,
       produto,
@@ -105,11 +110,11 @@ const Product = () => {
                 options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]}
               />
             </div>
-            {notify ? (
-              <h4 className={styles.notify}>
-                Pedido adicionado ao carrinho ✔{" "}
-              </h4>
-            ) : null}
+            {notify && quantidade > 0 ? (
+              <h4 className={styles.notify}>{notify}</h4>
+            ) : (
+              <h4 className={styles.notifyRed}>{notify}</h4>
+            )}
             <button id={data.id} onClick={(e) => handleClick(e)}>
               Adicionar ao carrinho
             </button>

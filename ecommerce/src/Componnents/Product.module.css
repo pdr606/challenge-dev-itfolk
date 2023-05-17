@@ -21,6 +21,7 @@
 }
 
 .right {
+  font-family: "Roboto", sans-serif;
   margin-right: 10%;
   width: 40%;
   height: 100%;
@@ -36,11 +37,12 @@
 
 .right h2 {
   padding-top: 30px;
+  font-weight: 400;
 }
 
 .right p {
   font-size: 25px;
-  font-weight: bold;
+  font-weight: 500;
   text-align: left;
   padding-top: 20px;
   padding-left: 5px;
@@ -99,11 +101,17 @@
 }
 
 .notify {
-  font-family: Arial, Helvetica, sans-serif;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 12px;
   padding-top: 15px;
   color: green;
+}
+
+.notifyRed {
+  font-weight: 300;
+  font-size: 12px;
+  padding-top: 15px;
+  color: red;
 }
 
 .loading {

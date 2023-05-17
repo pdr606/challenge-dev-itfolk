@@ -76,7 +76,10 @@ const Storage = () => {
                 <h2>{item.produto}</h2>
                 <p>Preço: R$ {item.preço}</p>
                 <p>Quantidade: {item.quantidade}</p>
-                <p>Total: R$ {item.total}</p>
+                <p>
+                  {console.log(item.total)}
+                  Total: R$ {item.total.toLocaleString("pt-BR")}
+                </p>
                 <button
                   onClick={() => deleteItem(item)}
                   className={styles.button}
@@ -87,9 +90,12 @@ const Storage = () => {
             </div>
           ))}
           <div className={styles.finishBuy}>
-            <h2>
-              Subtotal ({totalAmount} itens): <span>R$ {totalPay}</span>
-            </h2>
+            {
+              <h2>
+                Subtotal ({totalAmount} itens):{" "}
+                <span>R$ {totalPay.toLocaleString("pt-BR")}</span>
+              </h2>
+            }
             <button onClick={() => setOpenModal(!openModal)}>Finalizar</button>
             <button
               onClick={() => setOpenModalDelete(!openModalDelete)}
