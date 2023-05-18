@@ -123,6 +123,7 @@ const Storage = () => {
                 <span>R$ {totalPay.toLocaleString("pt-BR")}</span>
               </h2>
             }
+            <div className={styles.mobile} >
             <button onClick={() => setOpenModal(!openModal)}>Finalizar</button>
             <button
               onClick={() => setOpenModalDelete(!openModalDelete)}
@@ -130,6 +131,7 @@ const Storage = () => {
             >
               Excluir Carrinho
             </button>
+            </div>
 
             <Modal
               text="Seu carrinho está sendo excluido"
