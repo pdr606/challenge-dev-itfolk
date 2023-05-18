@@ -7,7 +7,7 @@ function Select({ options, value, setValue, text, ...props }) {
       onChange={({ target }) => setValue(target.value)}
       {...props}
     >
-      <option value={text}>{text}</option>
+      <option  value={text}>{text}</option>
       {options.map((option) => (
         <option key={option} value={option}>
           {option}

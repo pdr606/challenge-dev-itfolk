@@ -33,7 +33,6 @@ const Product = () => {
 
     let total = Number(String(preço).replace(".", "")) * quantidade;
 
-    console.log(total);
 
     const filterStorage = {
       id,

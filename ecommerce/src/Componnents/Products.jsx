@@ -51,7 +51,7 @@ const Products = () => {
 
   const filterProduct =
     product.length > 0
-      ? globalData.filter((item) =>d
+      ? globalData.filter((item) =>
           item.produto.toLowerCase().includes(product.toLowerCase())
         )
       : [];

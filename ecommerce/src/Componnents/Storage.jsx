@@ -5,6 +5,8 @@ import badIcon from "../img/badIcon.png";
 import Modal from "../Hooks/Modal";
 import loadingGif from "../img/loadingGif.gif";
 import VerifyLocalStorage from "../Hooks/VerifyLocalStorage";
+import Select from "../Hooks/Select";
+import { Link } from "react-router-dom";
 
 const Storage = () => {
   const { verify } = VerifyLocalStorage();
@@ -18,6 +20,17 @@ const Storage = () => {
   } = React.useContext(GlobalContext);
   const [openModal, setOpenModal] = React.useState(false);
   const [openModalDelete, setOpenModalDelete] = React.useState(false);
+
+  const updateQuantity = (item, newQuantity) => {
+    const updatedItem = { ...item, quantidade: newQuantity };
+    const updatedStorage = storage.map((obj) =>
+      obj === item
+        ? { ...updatedItem, total: Number(updatedItem.quantidade) * obj.preço.replace('.', '') }
+        : obj
+    );
+    localStorage.setItem("storage", JSON.stringify(updatedStorage));
+    setStorage(updatedStorage);
+  };
 
   React.useEffect(() => {
     verify();
@@ -44,7 +57,7 @@ const Storage = () => {
     }
 
     sum();
-  }, [storage, totalPay, totalAmount, setTotalAmount, setTotalPay]);
+  }, [storage, totalPay, totalAmount, setTotalAmount, setTotalPay,]);
 
   React.useEffect(() => {
     if (openModal || openModalDelete) {
@@ -56,6 +69,7 @@ const Storage = () => {
       }, 2000);
     }
   }, [openModal, setStorage, openModalDelete]);
+  
 
   return (
     <div>
@@ -67,15 +81,28 @@ const Storage = () => {
               key={Math.random() * 10000}
               className={styles.containerStorage}
             >
+              <Link className={styles.link}
+                to={`/product/${item.id}`}
+                key={item.id} >
               <div className={styles.containerStorageImg}>
                 <div className={styles.img}>
                   <img src={item.image} alt="Imagem Produto" />
                 </div>
               </div>
+              </Link>
               <div className={styles.containerInfo}>
                 <h2>{item.produto}</h2>
                 <p>Preço: R$ {item.preço}</p>
-                <p>Quantidade: {item.quantidade}</p>
+                <div className={styles.quantidade}>
+                  <p>Quantidade: </p>
+                <Select
+                className={styles.select}
+                text='1'
+                value={item.quantidade}
+                onChange={(e) => updateQuantity(item, e.target.value)}
+                options={["2", "3", "4", "5", "6", "7", "8", "9", "10"]}
+              />
+                </div>
                 <p>
                   {console.log(item.total)}
                   Total: R$ {item.total.toLocaleString("pt-BR")}
