@@ -31,6 +31,7 @@ const Products = () => {
         );
         setResultApi(response, json);
         setGlobalData(json);
+        console.log(response, json)
       }
       fetchData();
     }
