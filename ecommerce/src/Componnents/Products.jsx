@@ -17,6 +17,8 @@ const Products = () => {
   const [category, setCategory] = React.useState("Todas");
   const [product, setProduct] = React.useState("");
 
+  console.log(resultApi)
+
   React.useEffect(() => {
     verify();
   }, [verify]);
