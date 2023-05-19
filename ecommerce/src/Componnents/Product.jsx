@@ -69,6 +69,7 @@ const Product = () => {
         const { response, json } = await request(
           `https://my-json-server.typicode.com/pdr606/api-test/products/${id}`
         );
+        console.log(response, json)
       }
       fetchData();
     }
