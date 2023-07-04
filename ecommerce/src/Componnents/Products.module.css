@@ -128,18 +128,16 @@ main {
   font-weight: bold;
 }
 
-
-
 @media only screen and (max-width: 767px) {
   .container {
     display: grid;
-    grid-template-columns: 1fr 1fr ;
+    grid-template-columns: 1fr;
     margin-left: 2%;
     margin-right: 2%;
     gap: 20px;
     padding-bottom: 50px;
   }
-  
+
   .containerDiv {
     border: 1px solid lightgray;
     margin-top: 30px;
@@ -151,17 +149,31 @@ main {
     height: 530px;
   }
 
+  .ContainerDiv p {
+    font-family: "Roboto", sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    text-align: left;
+    padding-top: 20px;
+    padding-left: 5px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+  }
+
   .containerDiv img {
-    width: 100%;
+    width: 60%;
     height: 60%;
     background-color: gray;
   }
 
-  .containerDiv h2{
+  .containerDiv h2 {
     font-size: 16px;
+    width: 60%;
+    margin: auto;
   }
 
-  .containerInputBox{
+  .containerInputBox {
     width: 80%;
   }
   .inputInput {
@@ -169,5 +181,4 @@ main {
     padding-left: 2px;
     margin-left: 5px;
   }
-  
 }
